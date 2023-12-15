@@ -80,7 +80,11 @@ dependencies {
     implementation ("io.coil-kt:coil:2.5.0")
     implementation ("com.google.accompanist:accompanist-coil:0.15.0")
 
-    //Dagger - Hilt
+    // Picasso
+    implementation ("com.squareup.picasso:picasso:2.8")
+
+
+    // Dagger - Hilt
     implementation ("com.google.dagger:hilt-android:2.49")
     kapt ("com.google.dagger:hilt-android-compiler:2.49")
     kapt ("androidx.hilt:hilt-compiler:1.1.0")
