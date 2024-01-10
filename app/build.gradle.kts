@@ -77,12 +77,10 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
 
     // Coil
+    implementation ("io.coil-kt:coil-compose:2.5.0")
     implementation ("io.coil-kt:coil:2.5.0")
     implementation ("com.google.accompanist:accompanist-coil:0.15.0")
-
-    // Picasso
-    implementation ("com.squareup.picasso:picasso:2.8")
-
+    implementation ("com.github.skydoves:landscapist-coil:2.2.13")
 
     // Dagger - Hilt
     implementation ("com.google.dagger:hilt-android:2.49")
