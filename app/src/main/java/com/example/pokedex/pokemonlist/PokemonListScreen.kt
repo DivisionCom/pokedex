@@ -1,7 +1,6 @@
 package com.example.pokedex.pokemonlist
 
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -31,6 +30,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
@@ -48,15 +48,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
 import coil.compose.SubcomposeAsyncImage
+import coil.compose.SubcomposeAsyncImageContent
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.example.pokedex.R
 import com.example.pokedex.data.models.PokedexListEntry
 import com.example.pokedex.ui.theme.RobotoCondensed
-import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.coil.CoilImage
 
 @Composable
@@ -84,6 +83,8 @@ fun PokemonListScreen(
             ) {
 
             }
+            Spacer(modifier = Modifier.height(16.dp))
+            PokemonList(navController = navController)
         }
     }
 }
@@ -150,13 +151,13 @@ fun PokemonList(
     }
 
     LazyColumn(contentPadding = PaddingValues(16.dp)) {
-        val itemCount = if(pokemonList.size % 2 == 0) {
+        val itemCount = if (pokemonList.size % 2 == 0) {
             pokemonList.size / 2
         } else {
             pokemonList.size / 2 + 1
         }
         items(itemCount) {
-            if(it >= itemCount - 1 && !endReached) {
+            if (it >= itemCount - 1 && !endReached) {
                 viewModel.loadPokemonPaginated()
             }
             PokedexRow(rowIndex = it, entries = pokemonList, navController = navController)
@@ -197,33 +198,27 @@ fun PokedexEntry(
             }
     ) {
         Column {
-            val painter = rememberAsyncImagePainter(
+            SubcomposeAsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(entry.imageUrl)
-                    .target {
-                        viewModel.calcDominantColor(it) { color ->
-                            dominantColor = color
-                        }
+                    .crossfade(true)
+                    .build(),
+                contentDescription = entry.pokemonName,
+                loading = {
+                    CircularProgressIndicator(
+                        color = MaterialTheme.colorScheme.primary, modifier = Modifier.scale(0.5F)
+                    )
+                },
+                success = { success ->
+                    viewModel.calcDominantColor(success.result.drawable){
+                        dominantColor = it
                     }
-                    .build()
-            )
-            val state = painter.state
-            val transition by animateFloatAsState(
-                targetValue = if (state is AsyncImagePainter.State.Success) 1f else 0f, label = ""
-            )
-            CoilImage(
-                imageModel = { painter },
+                    SubcomposeAsyncImageContent()
+                },
                 modifier = Modifier
                     .size(120.dp)
-                    .align(Alignment.CenterHorizontally)
-                    .alpha(transition)
-            ) {
-                CircularProgressIndicator(
-                    color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier
-                        .scale(0.5f)
-                )
-            }
+                    .align(CenterHorizontally)
+            )
             Text(
                 text = entry.pokemonName,
                 fontFamily = RobotoCondensed,
@@ -250,7 +245,7 @@ fun PokedexRow(
                 modifier = Modifier.weight(1f)
             )
             Spacer(modifier = Modifier.width(16.dp))
-            if(entries.size >= rowIndex * 2 + 2) {
+            if (entries.size >= rowIndex * 2 + 2) {
                 PokedexEntry(
                     entry = entries[rowIndex * 2 + 1],
                     navController = navController,
