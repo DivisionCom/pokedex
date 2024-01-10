@@ -55,7 +55,7 @@ dependencies {
 
     implementation("androidx.compose.material:material-icons-core:1.5.4")
     implementation("androidx.compose.material:material-icons-extended:1.5.4")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0-rc02")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
     implementation("androidx.navigation:navigation-compose:2.7.6")
     implementation("androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha13")
 
@@ -73,14 +73,10 @@ dependencies {
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
     // Coroutine Lifecycle Scopes
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
-    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
 
-    // Coil
+    // Coil Compose
     implementation ("io.coil-kt:coil-compose:2.5.0")
-    implementation ("io.coil-kt:coil:2.5.0")
-    implementation ("com.google.accompanist:accompanist-coil:0.15.0")
-    implementation ("com.github.skydoves:landscapist-coil:2.2.13")
 
     // Dagger - Hilt
     implementation ("com.google.dagger:hilt-android:2.49")
@@ -92,7 +88,7 @@ dependencies {
     implementation ("androidx.appcompat:appcompat:1.6.1")
 
     implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.activity:activity-compose:1.8.2")
     implementation(platform("androidx.compose:compose-bom:2023.10.01"))
     implementation("androidx.compose.ui:ui")
