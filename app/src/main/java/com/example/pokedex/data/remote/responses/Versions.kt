@@ -8,5 +8,5 @@ data class Versions(
     val generationV: GenerationV,
     val generationVi: GenerationVi,
     val generationVii: GenerationVii,
-    val generationViii: GenerationViii
+    val generationViii: GenerationViii,
 )

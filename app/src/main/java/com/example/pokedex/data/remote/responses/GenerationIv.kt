@@ -3,5 +3,5 @@ package com.example.pokedex.data.remote.responses
 data class GenerationIv(
     val diamondPearl: DiamondPearl,
     val heartgoldSoulsilver: HeartgoldSoulsilver,
-    val platinum: Platinum
+    val platinum: Platinum,
 )
